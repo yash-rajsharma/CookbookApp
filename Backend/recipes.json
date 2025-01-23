@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Spaghetti Bolognese",
+    "instructions": "Boil pasta, prepare sauce, mix together.",
+    "ingredients": [
+      "pasta",
+      "tomato sauce",
+      "ground beef"
+    ],
+    "thumbnail": "spaghetti.jpg",
+    "postedAt": "2025-01-19T12:00:00Z",
+    "postedBy": "thenameisyash"
+  },
+  {
+    "id": 2,
+    "name": "Pancakes",
+    "instructions": "Mix batter, pour on griddle, cook, and serve.",
+    "ingredients": [
+      "flour",
+      "eggs",
+      "milk",
+      "sugar"
+    ],
+    "thumbnail": "pancakes.jpg",
+    "postedAt": "2025-01-19T13:00:00Z",
+    "postedBy": "thenameisyash"
+  }
+]
