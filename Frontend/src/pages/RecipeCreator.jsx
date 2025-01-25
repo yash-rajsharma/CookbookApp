@@ -12,6 +12,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const RecipeCreator = () => {
   const [name, setName] = useState("");
@@ -19,6 +20,7 @@ const RecipeCreator = () => {
   const [instructions, setInstructions] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const navigate = useNavigate();
 
   const handleNameChange = (e) => {
     const value = e.target.value;
@@ -59,6 +61,7 @@ const RecipeCreator = () => {
         setInstructions("");
         setThumbnail("");
         setSuggestions([]);
+        navigate("/");
       })
       .catch((error) => {
         console.error("Error creating recipe:", error);

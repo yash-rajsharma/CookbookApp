@@ -14,8 +14,6 @@ const Register = ({ onRegister }) => {
     axios
       .post("http://localhost:5000/auth/register", { username, password })
       .then((response) => {
-        localStorage.setItem("user", JSON.stringify(response.data));
-        onRegister();
         navigate("/login");
       })
       .catch(() => {

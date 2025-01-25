@@ -19,6 +19,7 @@ const Favorites = () => {
         .get(`http://localhost:5000/favorites/${user.username}`)
         .then((response) => {
           setFavorites(response.data);
+          console.log(response.data);
         })
         .catch((error) => console.error("Error fetching favorites:", error));
     }
@@ -60,8 +61,8 @@ const Favorites = () => {
         </Typography>
       ) : (
         <Grid container spacing={4} justifyContent="center">
-          {favorites.map((recipe) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={recipe.id}>
+          {favorites.map((recipe, index) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <Card
                 style={{
                   height: "100%",
@@ -85,7 +86,7 @@ const Favorites = () => {
                 <CardMedia
                   component="img"
                   height="160"
-                  image={recipe.thumbnail || "https://via.placeholder.com/160"}
+                  image={recipe?.thumbnail}
                   alt={recipe.name}
                   style={{ objectFit: "cover", borderRadius: "4px 4px 0 0" }}
                 />
