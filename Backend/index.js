@@ -1,5 +1,3 @@
-// Backend for the Cookbook App
-
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
@@ -13,7 +11,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Data files   
+// Data files
 const USERS_FILE = "./users.json";
 const RECIPES_FILE = "./recipes.json";
 const FAVORITES_FILE = "./favorites.json";

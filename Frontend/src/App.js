@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteHandler } from "./Routes";
+import RouteHandler from "./Routes";
 
 function App() {
   return (

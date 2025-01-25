@@ -3,12 +3,8 @@
     "id": 1,
     "name": "Spaghetti Bolognese",
     "instructions": "Boil pasta, prepare sauce, mix together.",
-    "ingredients": [
-      "pasta",
-      "tomato sauce",
-      "ground beef"
-    ],
-    "thumbnail": "spaghetti.jpg",
+    "ingredients": ["pasta", "tomato sauce", "ground beef"],
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj9XSI0jUOU9bPdDa6N895defc1q1Iil14Zg&s",
     "postedAt": "2025-01-19T12:00:00Z",
     "postedBy": "thenameisyash"
   },
@@ -16,14 +12,18 @@
     "id": 2,
     "name": "Pancakes",
     "instructions": "Mix batter, pour on griddle, cook, and serve.",
-    "ingredients": [
-      "flour",
-      "eggs",
-      "milk",
-      "sugar"
-    ],
-    "thumbnail": "pancakes.jpg",
+    "ingredients": ["flour", "eggs", "milk", "sugar"],
+    "thumbnail": "https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fill,g_auto,w_1500,ar_3:2/k%2FPhoto%2FRecipes%2F2024-06-seo-pancakes%2Fseo-pancakes-232",
     "postedAt": "2025-01-19T13:00:00Z",
     "postedBy": "thenameisyash"
+  },
+  {
+    "id": 3,
+    "name": "Daal Baati Churma",
+    "ingredients": ["Mummy btaegi"],
+    "instructions": "<p>Sfsffasfa\t</p>",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKxxrCe1_c9UuHe3EtTruUwqJCdngvartxgQ&s",
+    "postedBy": "thenameisyash",
+    "postedAt": "2025-01-25T07:50:49.186Z"
   }
 ]

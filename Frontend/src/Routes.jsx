@@ -1,13 +1,14 @@
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import RecipeCreator from "./pages/RecipeCreator";
 import Favorites from "./pages/Favorites";
-import Header from "./components/Header";
 
-export const RouteHandler = () => {
+const RouteHandler = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -24,10 +25,13 @@ export const RouteHandler = () => {
   };
 
   return (
-    <div>
+    <div className="App">
       <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
+        />
         <Route
           path="/login"
           element={
@@ -59,6 +63,8 @@ export const RouteHandler = () => {
           element={isAuthenticated ? <Favorites /> : <Navigate to="/login" />}
         />
       </Routes>
+      <Footer />
     </div>
   );
 };
+export default RouteHandler;
