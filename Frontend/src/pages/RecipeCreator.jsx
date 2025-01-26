@@ -11,6 +11,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  CircularProgress,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -20,13 +21,17 @@ const RecipeCreator = () => {
   const [instructions, setInstructions] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [loadingSuggestions, setLoadingSuggestions] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
+  // Handle recipe name change with suggestions
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
 
     if (value.length > 2) {
+      setLoadingSuggestions(true);
       axios
         .get(`https://forkify-api.herokuapp.com/api/search?q=${value}`)
         .then((response) => {
@@ -34,22 +39,29 @@ const RecipeCreator = () => {
             (recipe) => recipe.title
           );
           setSuggestions(suggestedRecipes);
+          setLoadingSuggestions(false);
         })
-        .catch((error) => console.error("Error fetching suggestions:", error));
+        .catch((error) => {
+          console.error("Error fetching suggestions:", error);
+          setLoadingSuggestions(false);
+        });
     } else {
       setSuggestions([]);
     }
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     const recipeData = {
       name,
       ingredients: ingredients.split(","),
       instructions,
       thumbnail,
-      postedBy: JSON.parse(localStorage.getItem("user")).username,
+      postedBy:
+        JSON.parse(localStorage.getItem("user"))?.username || "Anonymous",
     };
 
     axios
@@ -61,11 +73,13 @@ const RecipeCreator = () => {
         setInstructions("");
         setThumbnail("");
         setSuggestions([]);
+        setIsSubmitting(false);
         navigate("/");
       })
       .catch((error) => {
         console.error("Error creating recipe:", error);
         alert("Error creating recipe.");
+        setIsSubmitting(false);
       });
   };
 
@@ -101,19 +115,25 @@ const RecipeCreator = () => {
             InputProps={{ style: { color: "#ffffff" } }}
             InputLabelProps={{ style: { color: "#ffffff" } }}
           />
-          {suggestions.length > 0 && (
-            <List style={{ backgroundColor: "#2e2e2e", borderRadius: "4px" }}>
-              {suggestions.map((suggestion, index) => (
-                <ListItem
-                  button
-                  key={index}
-                  onClick={() => setName(suggestion)}
-                  style={{ color: "#ffffff" }}
-                >
-                  <ListItemText primary={suggestion} />
-                </ListItem>
-              ))}
-            </List>
+          {loadingSuggestions ? (
+            <CircularProgress
+              style={{ color: "#ffffff", margin: "10px auto" }}
+            />
+          ) : (
+            suggestions.length > 0 && (
+              <List style={{ backgroundColor: "#2e2e2e", borderRadius: "4px" }}>
+                {suggestions.map((suggestion, index) => (
+                  <ListItem
+                    button
+                    key={index}
+                    onClick={() => setName(suggestion)}
+                    style={{ color: "#ffffff" }}
+                  >
+                    <ListItemText primary={suggestion} />
+                  </ListItem>
+                ))}
+              </List>
+            )
           )}
           <TextField
             label="Ingredients (comma separated)"
@@ -138,8 +158,25 @@ const RecipeCreator = () => {
             InputProps={{ style: { color: "#ffffff" } }}
             InputLabelProps={{ style: { color: "#ffffff" } }}
           />
-          <Button type="submit" variant="contained" color="primary">
-            Create Recipe
+          {thumbnail && (
+            <img
+              src={thumbnail}
+              alt="Thumbnail Preview"
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "4px",
+                marginBottom: "10px",
+              }}
+            />
+          )}
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Creating..." : "Create Recipe"}
           </Button>
         </form>
       </Container>
